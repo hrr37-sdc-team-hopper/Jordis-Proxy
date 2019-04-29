@@ -1,5 +1,5 @@
 config:
-  target: 'http://localhost:3001'
+  target: 'http://localhost:8000'
   http:
     pool: 10
   phases:
@@ -20,24 +20,22 @@ config:
     skipheader: true
 scenarios:
   - name: "Get and Post request"
-    weight: 5
     flow:
         - get:
             url: "/books/{{ id }}"
-        - think: 3
         - post:
             url: "/books"
             json:
               bookid: 108760033
-              type: "HardCover"
-              pagenum: 222
-              publisher: "Orange Range Inc"
-              dates: "July 18, 2016"
-              title: "The Three Idiots"
+              type: "audio"
+              pagenum: 233
+              publisher: "Stardust Inc"
+              dates: "May 18, 2018"
+              title: "Somewhere in Time"
               isbn: "9876543210300"
               language: "English"
               characters: "Meaghan Beier, Booboo Mascio"
-              settings: "Macau, China"
-              litawards: "Tintin award 2019"
+              settings: "New York, USA"
+              litawards: "The Big Apple Award 2019"
               coverurl: "https://s3.amazonaws.com/uifaces/faces/twitter/dhilipsiva/128.jpg"
 
