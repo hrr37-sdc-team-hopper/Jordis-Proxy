@@ -1,0 +1,43 @@
+config:
+  target: 'http://localhost:3001'
+  http:
+    pool: 10
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      rampTo: 20
+      name: "Warm up"
+    - duration: 30
+      arrivalRate: 20
+      name: "Mid load"
+    - duration: 60
+      arrivalRate: 100
+      name: "Max load"
+  payload:
+    path: "IDs.csv"
+    fields:
+      - "id"
+    skipheader: true
+scenarios:
+  - name: "Get and Post request"
+    weight: 5
+    flow:
+        - get:
+            url: "/books/{{ id }}"
+        - think: 3
+        - post:
+            url: "/books"
+            json:
+              bookid: 108760033
+              type: "HardCover"
+              pagenum: 222
+              publisher: "Orange Range Inc"
+              dates: "July 18, 2016"
+              title: "The Three Idiots"
+              isbn: "9876543210300"
+              language: "English"
+              characters: "Meaghan Beier, Booboo Mascio"
+              settings: "Macau, China"
+              litawards: "Tintin award 2019"
+              coverurl: "https://s3.amazonaws.com/uifaces/faces/twitter/dhilipsiva/128.jpg"
+
